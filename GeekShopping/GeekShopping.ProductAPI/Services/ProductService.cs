@@ -36,5 +36,9 @@ namespace GeekShopping.ProductAPI.Services
             Product product = _productRepository.Save(_mapper.Map<Product>(vo));
             return _mapper.Map<ProductVO>(product);
         }
+        public bool Delete(long id)
+        {
+            return _productRepository.Delete(id);
+        }
     }
 }

@@ -20,15 +20,13 @@ namespace GeekShopping.ProductAPI.Repository
 
         public bool Delete(long id)
         {
-            try
+            TEntity? entity = FindById(id);
+            if (entity != null)
             {
-                _context.Set<TEntity>().Remove(FindById(id));
+                _context.Set<TEntity>().Remove(entity);
                 return true;
             }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
 
         public IEnumerable<TEntity> FindAll()
@@ -36,7 +34,7 @@ namespace GeekShopping.ProductAPI.Repository
             return _context.Set<TEntity>().ToList();
         }
 
-        public TEntity FindById(long id)
+        public TEntity? FindById(long id)
         {
             return _context.Set<TEntity>().Find(id);
         }

@@ -25,9 +25,46 @@ namespace GeekShopping.ProductAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<ProductVO> FindById(long id)
+        public ActionResult<ProductVO> FindById([FromRoute]long id)
         {
             return Ok(_productService.FindById(id));
+        }
+
+        [HttpPost]
+        public ActionResult<ProductVO> Save([FromBody] ProductVO vo)
+        {
+            try
+            {
+                return Ok(_productService.Save(vo));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
+        }
+        [HttpPut]
+        public ActionResult<ProductVO> Update([FromBody] ProductVO vo)
+        {
+            try
+            {
+                return Ok(_productService.Save(vo));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<ProductVO> Delete([FromRoute] long id)
+        {
+            if(_productService.Delete(id))
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }
